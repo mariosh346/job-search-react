@@ -1,0 +1,1 @@
+export const isValidFilters = jest.fn(() => true);
