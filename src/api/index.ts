@@ -13,7 +13,7 @@ export const fetchJobs = async () => {
     }
   }
 };
-fetchJobs().then((data) => console.log(data));
+//fetchJobs().then((data) => console.log(data));
 export const fetchFilters = async () => {
   try {
     const response = await axios.get(`${baseUrl}/filters`);

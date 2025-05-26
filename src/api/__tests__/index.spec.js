@@ -5,20 +5,24 @@ jest.mock('axios', () => ({
   get: jest.fn(),
 }));
 
-
+// const fetchJobsParams = {
+//   lang: 'en', location: 'New York', 
+//   category: 'Software Engineering', category: 'Data Science', page: 1,
+//   pageSize: 10
+// };
+const mockJobData = [
+  { id: 1, title: 'Software Engineer' },
+  { id: 2, title: 'Data Scientist' },
+];
 const fetchJobsFactory = () => {
-  const mockJobData = [
-    { id: 1, title: 'Software Engineer' },
-    { id: 2, title: 'Data Scientist' },
-  ];
   axios.get.mockResolvedValue({ data: mockJobData });
   return fetchJobs();
 }
+const mockFilterData = [
+  { location: 'New York', category: 'Software Engineering' },
+  { location: 'San Francisco', category: 'Data Science' },
+];
 const fetchFiltersFactory = () => {
-    const mockFilterData = [
-      { location: 'New York', category: 'Software Engineering' },
-      { location: 'San Francisco', category: 'Data Science' },
-    ];
     axios.get.mockResolvedValue({ data: mockFilterData });
   return fetchFilters();
 }
@@ -29,13 +33,16 @@ describe('API Functions', () => {
   });
 
   it('fetchJobs should return job data on success', async () => {
-    await fetchJobsFactory();
+    const result = await fetchJobsFactory();
 
     expect(result).toEqual(mockJobData);
   });
   it('fetchJobs should call axios.get with the correct URL on success', async () => {
     await fetchJobsFactory();
-    expect(axios.get).toHaveBeenCalledWith('https://ka-fe-jobboard-assignment-api.azurewebsites.net/jobs');
+    expect(axios.get).toHaveBeenCalledWith(
+      'https://ka-fe-jobboard-assignment-api.azurewebsites.net/jobs',
+      // fetchJobsParams
+    );
   });
 
 
