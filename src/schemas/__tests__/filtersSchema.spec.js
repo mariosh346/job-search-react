@@ -1,12 +1,9 @@
 import { isValidFilters } from '../filtersSchema';
-
-jest.mock('../filterSchema', () => ({
-  isValidFilter: jest.fn(() => true)
-}));
+import { validFilter } from './filterSchema.spec';
 
 const validFilters = {
-  locations: [{ name: 'New York', value: 'ny' }],
-  categories: [{ name: 'Food', value: 'food' }]
+    locations: [validFilter],
+    categories: [validFilter]
 };
 
 describe('isValidFilters', () => {
@@ -19,8 +16,10 @@ describe('isValidFilters', () => {
     test('should return false if locations are missing', () => {
         expect(isValidFilters({ categories: validFilters.categories })).toBe(true);
     });
-    test('should return false if isValidFilter returns false for any filter', () => {
-        isValidFilter.mockReturnValue(false);
+    test('should return false if locations filter is invalid', () => {
         expect(isValidFilters({ ...validFilters, locations: [{ name: 'Invalid Location', value: 'invalid' }] })).toBe(false);
+    });
+    test('should return false if categories filter is invalid', () => {
+        expect(isValidFilters({ ...validFilters, categories: [{ name: 'Invalid category', value: 'invalid' }] })).toBe(false);
     });
 });
