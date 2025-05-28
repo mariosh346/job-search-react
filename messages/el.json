@@ -1,0 +1,46 @@
+{
+    "Error": {
+        "description": "<p>Δυστυχώς προέκυψε ένα σφάλμα.</p><p>Μπορείτε να προσπαθήσετε να <retry>επαναφορτώσετε τη σελίδα</retry> που επισκεπτόσασταν.</p>",
+        "title": "Κάτι πήγε στραβά!"
+    },
+    "IndexPage": {
+        "description": "Αυτό είναι ένα βασικό παράδειγμα που δείχνει τη χρήση του <code>next-intl</code> με το Next.js App Router. Δοκιμάστε να αλλάξετε τη γλώσσα πάνω δεξιά και δείτε πώς αλλάζει το περιεχόμενο.",
+        "title": "παράδειγμα next-intl"
+    },
+    "LocaleLayout": {
+        "title": "παράδειγμα next-intl"
+    },
+    "LocaleSwitcher": {
+        "label": "Αλλαγή γλώσσας",
+        "locale": "{locale, select, el {GR Ελληνικά} en {🇺🇸 Αγγλικά} other {Άγνωστο}}"
+    },
+    "Manifest": {
+        "name": "παράδειγμα next-intl"
+    },
+    "Navigation": {
+        "home": "Αρχική",
+        "pathnames": "Ονομασίες διαδρομών"
+    },
+    "NotFoundPage": {
+        "description": "Ελέγξτε ξανά τη γραμμή διεύθυνσης του browser ή χρησιμοποιήστε την πλοήγηση για να πάτε σε γνωστή σελίδα.",
+        "title": "Η σελίδα δεν βρέθηκε"
+    },
+    "PageLayout": {
+        "links": {
+            "docs": {
+                "description": "Μάθετε περισσότερα για το next-intl στην επίσημη τεκμηρίωση.",
+                "href": "https://next-intl.dev",
+                "title": "Τεκμηρίωση"
+            },
+            "source": {
+                "description": "Δείτε τον πηγαίο κώδικα αυτού του παραδείγματος στο GitHub.",
+                "href": "https://github.com/amannn/next-intl/tree/main/examples/example-app-router",
+                "title": "Πηγαίος κώδικας"
+            }
+        }
+    },
+    "PathnamesPage": {
+        "description": "<p>Οι ονομασίες διαδρομών είναι επίσης μεταφρασμένες.</p><p>Αν χρησιμοποιείτε την προεπιλεγμένη γλώσσα Αγγλικά, θα δείτε <code>/en/pathnames</code> στη γραμμή διεύθυνσης του browser σε αυτή τη σελίδα.</p><p>Αν αλλάξετε τη γλώσσα στα Ελληνικά, το URL προσαρμόζεται ανάλογα (<code>/el/ονομα</code>).</p>",
+        "title": "Ονομασίες διαδρομών"
+    }
+}
