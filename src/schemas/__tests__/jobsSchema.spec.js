@@ -1,29 +1,28 @@
 import { isValidJobs } from '../jobsSchema';
-import { isValidJob } from '../jobSchema';
-
-jest.mock('../jobSchema', () => ({
-  isValidJob: jest.fn(() => true)
-}));
+import { validJob } from './jobSchema.spec';
 
 const validJobsResponse = {
-  results: [{}],
+  results: [validJob],
   total: 1,
   page: 1,
   pageSize: 10
 };
 
 describe('Jobs response schema validation', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should validate a correct jobs response object', () => {
     expect(isValidJobs(validJobsResponse)).toBe(true);
   });
 
-  it('should invalidate if isValidJob returns false', () => {
-    isValidJob.mockReturnValue(false);
+  it('should invalidate if results is not an array', () => {
     expect(isValidJobs({ ...validJobsResponse, results: 'not-an-array' })).toBe(false);
   });
 
   it('should invalidate if results contains invalid job', () => {
-    const invalidResults = [{ ...validJob, id: '1' }];
+    const invalidResults = [{ id: 2, title: 'Invalid' }];
     expect(isValidJobs({ ...validJobsResponse, results: invalidResults })).toBe(false);
   });
 

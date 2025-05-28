@@ -1,6 +1,6 @@
 import { isValidJob } from '../jobSchema';
 
-const validJob = {
+export const validJob = {
   id: 1,
   slug: 'software-engineer',
   title: 'Software Engineer',
