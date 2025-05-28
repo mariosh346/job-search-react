@@ -1,29 +1,17 @@
-import {Locale, useTranslations} from 'next-intl';
-import {setRequestLocale} from 'next-intl/server';
-import {use} from 'react';
-import PageLayout from '@/components/PageLayout';
+import { getTranslations } from 'next-intl/server';
+import IndexPageContent from '@/components/IndexPageContent';
 
-type Props = {
-  params: Promise<{locale: Locale}>;
-};
+export async function generateMetadata() {
+  const t = await getTranslations('IndexPage');
+  return {
+    title: t('title')
+  };
+}
 
-export default function IndexPage({params}: Props) {
-  const {locale} = use(params);
-
-  // Enable static rendering
-  setRequestLocale(locale);
-
-  const t = useTranslations('IndexPage');
-
+export default function IndexPage() {
   return (
-    <PageLayout title={t('title')}>
-      <p className="max-w-[590px]">
-        {t.rich('description', {
-          code: (chunks) => (
-            <code className="font-mono text-white">{chunks}</code>
-          )
-        })}
-      </p>
-    </PageLayout>
+    <main className="flex h-full flex-col items-center justify-center gap-2 p-4 text-center">
+      <IndexPageContent />
+    </main>
   );
 }

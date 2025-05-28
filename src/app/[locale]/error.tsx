@@ -1,37 +1,17 @@
 'use client';
 
-import {useTranslations} from 'next-intl';
-import {useEffect} from 'react';
-import PageLayout from '@/components/PageLayout';
+import { useTranslations } from 'next-intl';
+import ErrorContent from '@/components/ErrorContent';
 
-type Props = {
-  error: Error;
-  reset(): void;
-};
-
-export default function Error({error, reset}: Props) {
+export default function Error() {
   const t = useTranslations('Error');
 
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
-
   return (
-    <PageLayout title={t('title')}>
-      <div>
-        {t.rich('description', {
-          p: (chunks) => <p className="mt-4">{chunks}</p>,
-          retry: (chunks) => (
-            <button
-              className="text-white underline underline-offset-2"
-              onClick={reset}
-              type="button"
-            >
-              {chunks}
-            </button>
-          )
-        })}
+    <main className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center gap-2">
+      <div className="text-center">
+        <h1 className="text-2xl font-semibold mb-4">{t('title')}</h1>
+        <ErrorContent />
       </div>
-    </PageLayout>
+    </main>
   );
 }

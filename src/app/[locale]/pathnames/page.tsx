@@ -1,30 +1,17 @@
-import {Locale, useTranslations} from 'next-intl';
-import {setRequestLocale} from 'next-intl/server';
-import {use} from 'react';
-import PageLayout from '@/components/PageLayout';
+import { getTranslations } from 'next-intl/server';
+import PathnamesContent from '@/components/PathnamesContent';
 
-type Props = {
-  params: Promise<{locale: Locale}>;
-};
+export async function generateMetadata() {
+  const t = await getTranslations('PathnamesPage');
+  return {
+    title: t('title')
+  };
+}
 
-export default function PathnamesPage({params}: Props) {
-  const {locale} = use(params);
-
-  // Enable static rendering
-  setRequestLocale(locale);
-
-  const t = useTranslations('PathnamesPage');
-
+export default function PathnamesPage() {
   return (
-    <PageLayout title={t('title')}>
-      <div className="max-w-[490px]">
-        {t.rich('description', {
-          p: (chunks) => <p className="mt-4">{chunks}</p>,
-          code: (chunks) => (
-            <code className="font-mono text-white">{chunks}</code>
-          )
-        })}
-      </div>
-    </PageLayout>
+    <main className="flex h-full flex-col items-center justify-center gap-2 p-4 text-center">
+      <PathnamesContent />
+    </main>
   );
 }
