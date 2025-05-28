@@ -12,7 +12,7 @@
   },
   "LocaleSwitcher": {
     "label": "Change language",
-    "locale": "{locale, select, el {GR Ελληνικά} en {🇺🇸 English} other {Unknown}}"
+    "locale": "{locale, select, el {GR Ελληνικά} en {US English} other {Unknown}}"
   },
   "Manifest": {
     "name": "next-intl example"
@@ -40,7 +40,7 @@
     }
   },
   "PathnamesPage": {
-    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/en/pathnames</code> in the browser address bar on this page.</p><p>If you change the locale to German, the URL is localized accordingly (<code>/el/ονομα</code>).</p>",
+    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/en/pathnames</code> in the browser address bar on this page.</p><p>If you change the locale to GR, the URL is localized accordingly (<code>/el/ονομα</code>).</p>",
     "title": "Pathnames"
   }
 }
