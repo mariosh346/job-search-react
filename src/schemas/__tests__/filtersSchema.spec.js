@@ -11,10 +11,10 @@ describe('isValidFilters', () => {
         expect(isValidFilters(validFilters)).toBe(true);
     });
     test('should return false if categories are missing', () => {
-        expect(isValidFilters({ locations: validFilters.locations })).toBe(true);
+        expect(isValidFilters({ locations: validFilters.locations })).toBe(false);
     });
     test('should return false if locations are missing', () => {
-        expect(isValidFilters({ categories: validFilters.categories })).toBe(true);
+        expect(isValidFilters({ categories: validFilters.categories })).toBe(false);
     });
     test('should return false if locations filter is invalid', () => {
         expect(isValidFilters({ ...validFilters, locations: [{ name: 'Invalid Location', value: 'invalid' }] })).toBe(false);
