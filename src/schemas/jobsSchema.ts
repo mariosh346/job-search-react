@@ -8,6 +8,8 @@ const jobsSchema = z.object({
   pageSize: z.number(),
 });
 
+export type Jobs = z.infer<typeof jobsSchema>;
+
 export const isValidJobs = (jobs: any): boolean => {
   const result = jobsSchema.safeParse(jobs);
   return result.success;

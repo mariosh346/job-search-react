@@ -1,10 +1,10 @@
 import { isValidFilters } from "@/schemas/filtersSchema";
 import axios from "axios";
-const baseUrl = 'https://ka-fe-jobboard-assignment-api.azurewebsites.net/jobs';
+import axiosInstance from "./axiosConfig";
 
 export const fetchFilters = async () => {
   try {
-    const { data } = await axios.get(`${baseUrl}/filters`);
+    const { data } = await axiosInstance.get('/filters');
     if (!isValidFilters(data)) {
       throw new Error('Invalid filters data fetched');
     }

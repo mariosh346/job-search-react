@@ -1,7 +1,6 @@
-import axios from "axios";
-import { isValidJobs } from "@/schemas/jobsSchema";
+import axiosInstance from './axiosConfig';
+import { isValidJobs, Jobs } from "@/schemas/jobsSchema";
 import { z } from "zod";
-const baseUrl = 'https://ka-fe-jobboard-assignment-api.azurewebsites.net/jobs';
 
 const fetchJobsParamsSchema = z.object({
   lang: z.string().optional(),
@@ -13,10 +12,10 @@ const fetchJobsParamsSchema = z.object({
 
 type FetchJobsParams = z.infer<typeof fetchJobsParamsSchema>;
 
-export const fetchJobs = async (params: FetchJobsParams = {}) => {
+export const fetchJobs = async (params: FetchJobsParams = {}): Promise<Jobs> => {
   try {
     const parsedParams = fetchJobsParamsSchema.parse(params);
-    const { data } = await axios.get(baseUrl, { params: parsedParams });
+    const { data } = await axiosInstance.get('/', { params: parsedParams });
     if (!isValidJobs(data)) {
       throw new Error('Invalid jobs data');
     }
