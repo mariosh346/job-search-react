@@ -1,5 +1,6 @@
 import { fetchFilters } from '../index';
 import axios from 'axios';
+import { isValidFilters } from '@/schemas/filtersSchema'
 
 jest.mock('axios', () => ({
   get: jest.fn(),
@@ -34,8 +35,8 @@ describe('fetchFilters', () => {
 
     await expect(fetchFilters()).rejects.toThrow('Error fetching filters');
   });
-  it('should reject if filters are not valid', () => {
+  it('should reject if filters are not valid', async () => {
     isValidFilters.mockReturnValue(false);
     await expect(fetchFilters()).rejects.toBeDefined();
-  }
+  })
 });
