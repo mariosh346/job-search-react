@@ -5,6 +5,7 @@ import { isValidFilters } from '@/schemas/filtersSchema'
 jest.mock('axios', () => ({
   get: jest.fn(),
 }));
+jest.mock('@/schemas/filtersSchema');
 
 const mockFilterData = [
   { location: 'New York', category: 'Software Engineering' },
@@ -18,6 +19,7 @@ const fetchFiltersFactory = () => {
 describe('fetchFilters', () => {
   afterEach(() => {
     jest.clearAllMocks();
+    isValidFilters.mockReturnValue(true);
   });
 
   it('should return filter data on success', async () => {
@@ -37,6 +39,6 @@ describe('fetchFilters', () => {
   });
   it('should reject if filters are not valid', async () => {
     isValidFilters.mockReturnValue(false);
-    await expect(fetchFilters()).rejects.toBeDefined();
+    await expect(fetchFiltersFactory()).rejects.toBeDefined();
   })
 });

@@ -16,11 +16,11 @@ type FetchJobsParams = z.infer<typeof fetchJobsParamsSchema>;
 export const fetchJobs = async (params: FetchJobsParams = {}) => {
   try {
     const parsedParams = fetchJobsParamsSchema.parse(params);
-    const response = await axios.get(baseUrl, { params: parsedParams });
-    if (!isValidJobs(response.data)) {
+    const { data } = await axios.get(baseUrl, { params: parsedParams });
+    if (!isValidJobs(data)) {
       throw new Error('Invalid jobs data');
     }
-    return response.data;
+    return data;
   } catch (error: unknown) {
     if (error instanceof Error) {
         throw new Error(`Error fetching jobs: ${error.message}`);
