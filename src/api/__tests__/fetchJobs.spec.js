@@ -1,8 +1,8 @@
 import { fetchJobs } from '../fetchJobs';
 import { isValidJobs } from '@/schemas/jobsSchema'
-import axios from 'axios';
+import axios from "../axiosConfig";
 
-jest.mock('axios', () => ({
+jest.mock('../axiosConfig', () => ({
   get: jest.fn(),
 }));
 jest.mock('@/schemas/jobsSchema');
@@ -35,7 +35,7 @@ describe('fetchJobsFactory', () => {
   it(' should call axios.get with the correct URL and params on success', async () => {
     await fetchJobsFactory();
     expect(axios.get).toHaveBeenCalledWith(
-      'https://ka-fe-jobboard-assignment-api.azurewebsites.net/jobs',
+      '/',
       { params: fetchJobsParams }
     );
   });

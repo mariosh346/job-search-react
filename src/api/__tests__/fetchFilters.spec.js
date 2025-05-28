@@ -1,8 +1,8 @@
 import { fetchFilters } from '../index';
-import axios from 'axios';
 import { isValidFilters } from '@/schemas/filtersSchema'
+import axios from "../axiosConfig";
 
-jest.mock('axios', () => ({
+jest.mock('../axiosConfig', () => ({
   get: jest.fn(),
 }));
 jest.mock('@/schemas/filtersSchema');
@@ -29,7 +29,7 @@ describe('fetchFilters', () => {
   });
   it('should call axios.get with the correct URL on success', async () => {
     await fetchFiltersFactory();
-    expect(axios.get).toHaveBeenCalledWith('https://ka-fe-jobboard-assignment-api.azurewebsites.net/jobs/filters');
+    expect(axios.get).toHaveBeenCalledWith('/filters');
   });
 
   it('should throw an error on failure', async () => {
