@@ -2,6 +2,7 @@ import { fetchJobs } from '@/api/fetchJobs';
 import { fetchFilters } from '@/api/fetchFilters';
 import { useQuery } from '@tanstack/react-query';
 import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
+import { Jobs } from '@/schemas/jobsSchema';
 
 function searchParamsToObject(params: unknown) {
     if (params instanceof ReadonlyURLSearchParams) {
@@ -16,12 +17,13 @@ function searchParamsToObject(params: unknown) {
     return params;
 }
 
-export const useJobsQuery = () => {
+export const useJobsQuery = (initialData?: Jobs) => {
     const searchParams = useSearchParams();
     const parsedParams = searchParamsToObject(searchParams);
     return useQuery({
         queryKey: ['jobs', parsedParams],
         queryFn: () => fetchJobs(parsedParams),
+        initialData
     });
 };
 

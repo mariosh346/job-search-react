@@ -1,13 +1,21 @@
 import { useTranslations } from 'next-intl';
-import { Jobs } from '@/schemas/jobsSchema';
 import { Typography } from '@mui/material';
+import { useJobsQuery } from '@/hooks/useJobsQuery';
+import ErrorBoundary from './ErrorBoundary';
 
-interface JobListProps {
-    jobs: Jobs | undefined;
-}
-
-export default function JobList({ jobs }: JobListProps) {
+export default async function JobList() {
     const t = useTranslations('Jobs');
+    const { data: jobs, isLoading, error } = useJobsQuery();
+
+    if (isLoading) {
+        return (
+            <div role="status">{t('loading')}</div>
+        )
+    }
+
+    if (error) {
+        return <ErrorBoundary />;
+    }
 
     if (!jobs?.results?.length) {
         return (

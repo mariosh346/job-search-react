@@ -1,23 +1,27 @@
-'use client';
-
+import JobList from './JobList';
+import SearchFilters from './SearchFilters';
 import { useTranslations } from 'next-intl';
-import ErrorBoundary from './ErrorBoundary';
-import { useJobsQuery } from '@/hooks/useJobsQuery';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 export default function IndexPageContent() {
-    const { data: jobs, isLoading, error } = useJobsQuery();
     const t = useTranslations('IndexPage');
 
-    if (error) {
-        return <ErrorBoundary />;
-    }
-
     return (
-        <div>
-            {t('description.text')}{' '}
-            <code>next-intl</code>{' '}
-            {t('description.withRouter')}{' '}
-            <span>{t('description.tryChanging')}</span>
-        </div>
+        <Container maxWidth="lg">
+            <Box
+                sx={{
+                    my: 4,
+                }}
+            >
+                <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
+                    {t('title')}
+                </Typography>
+                <SearchFilters />
+                <JobList />
+
+            </Box>
+        </Container>
     );
 }
