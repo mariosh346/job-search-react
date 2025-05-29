@@ -1,4 +1,4 @@
-import {useTranslations} from 'next-intl';
+import { useTranslations } from 'next-intl';
 import LocaleSwitcher from './LocaleSwitcher';
 import NavigationLink from './NavigationLink';
 
@@ -10,7 +10,6 @@ export default function Navigation() {
       <nav className="container flex justify-between p-2 text-white">
         <div>
           <NavigationLink href="/">{t('home')}</NavigationLink>
-          <NavigationLink href="/pathnames">{t('pathnames')}</NavigationLink>
         </div>
         <LocaleSwitcher />
       </nav>

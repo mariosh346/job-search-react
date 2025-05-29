@@ -1,9 +1,9 @@
 'use client';
 
 import clsx from 'clsx';
-import {useSelectedLayoutSegment} from 'next/navigation';
-import {ComponentProps} from 'react';
-import {Link} from '@/i18n/navigation';
+import { useSelectedLayoutSegment } from 'next/navigation';
+import { ComponentProps } from 'react';
+import { Link } from '@/i18n/navigation';
 
 export default function NavigationLink({
   href,
@@ -18,7 +18,7 @@ export default function NavigationLink({
       aria-current={isActive ? 'page' : undefined}
       className={clsx(
         'inline-block px-2 py-3 transition-colors',
-        isActive ? 'text-white' : 'text-gray-400 hover:text-gray-200'
+        isActive ? 'text-gray-400' : 'text-gray-800 hover:text-gray-600'
       )}
       href={href}
       {...rest}
