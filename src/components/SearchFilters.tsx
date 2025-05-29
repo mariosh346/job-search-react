@@ -18,21 +18,17 @@ export default function SearchFilters() {
         params.set(type, String(value));
         router.push(`?${params.toString()}`);
     };
-    const location = searchParams.get('location') || '';
-    const category = searchParams.get('category') || '';
 
     return (
         <div className="my-8 flex gap-4">
             <Filter
                 type="location"
-                value={location}
                 options={filters?.locations}
                 onChange={(value) => handleFilterChange('location', value)}
             />
 
             <Filter
                 type="category"
-                value={category}
                 options={filters?.categories}
                 onChange={(value) => handleFilterChange('category', value)}
             />
