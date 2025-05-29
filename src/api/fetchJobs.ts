@@ -4,6 +4,7 @@ import { z } from "zod";
 
 const fetchJobsParamsSchema = z.object({
   lang: z.string().optional(),
+  q: z.string().optional(),
   location: z.string().optional(),
   category: z.string().optional(),
   page: z.number().optional(),

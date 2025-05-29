@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@mui/material';
 import { useTranslations } from 'next-intl';
 
 export default function ErrorBoundary() {
@@ -9,12 +10,18 @@ export default function ErrorBoundary() {
         <div role="alert" className="p-4 bg-red-50 text-red-700 rounded-md">
             <h2 className="font-bold mb-2">{t('errorTitle')}</h2>
             <p>{t('genericError')}</p>
-            <button
+            <Button
                 onClick={() => window.location.reload()}
-                className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                color="error"
             >
                 {t('retry')}
-            </button>
+            </Button>
+            <Button
+                onClick={() => window.history.back()}
+
+            >
+                {t('Go back')}
+            </Button>
         </div>
     );
 }

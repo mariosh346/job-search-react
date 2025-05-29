@@ -1,7 +1,6 @@
 import { fetchJobs } from '@/api/fetchJobs';
 import { fetchFilters } from '@/api/fetchFilters';
 import { useQuery } from '@tanstack/react-query';
-import { z } from "zod";
 import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
 
 function searchParamsToObject(params: unknown) {
