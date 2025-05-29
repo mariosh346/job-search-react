@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { Jobs } from '@/schemas/jobsSchema';
 
-function searchParamsToObject(params: unknown) {
+export function searchParamsToObject(params: unknown) {
     if (params instanceof ReadonlyURLSearchParams) {
         const obj: Record<string, string | number> = {};
         for (const [key, value] of params.entries()) {

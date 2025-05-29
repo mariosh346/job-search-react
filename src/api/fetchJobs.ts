@@ -1,5 +1,6 @@
 import axiosInstance from './axiosConfig';
 import { isValidJobs, Jobs } from "@/schemas/jobsSchema";
+import { ReadonlyURLSearchParams } from 'next/navigation';
 import { z } from "zod";
 
 const fetchJobsParamsSchema = z.object({
