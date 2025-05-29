@@ -10,7 +10,7 @@ export async function generateMetadata() {
 
 export default function IndexPage() {
   return (
-    <main className="flex h-full flex-col items-center justify-center gap-2 p-4 text-center">
+    <main className="h-full gap-2 p-4">
       <IndexPageContent />
     </main>
   );

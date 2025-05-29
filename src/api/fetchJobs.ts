@@ -12,7 +12,7 @@ const fetchJobsParamsSchema = z.object({
 
 type FetchJobsParams = z.infer<typeof fetchJobsParamsSchema>;
 
-export const fetchJobs = async (params: FetchJobsParams = {}): Promise<Jobs> => {
+export const fetchJobs = async (params: unknown = {}): Promise<Jobs> => {
   try {
     const parsedParams = fetchJobsParamsSchema.parse(params);
     const { data } = await axiosInstance.get('/', { params: parsedParams });
