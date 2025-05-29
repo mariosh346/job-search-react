@@ -1,3 +1,5 @@
+'use client';
+
 import JobList from './JobList';
 import SearchFilters from './SearchFilters';
 import { useTranslations } from 'next-intl';

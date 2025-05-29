@@ -1,9 +1,11 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { Typography } from '@mui/material';
 import { useJobsQuery } from '@/hooks/useJobsQuery';
 import ErrorBoundary from './ErrorBoundary';
 
-export default async function JobList() {
+export default function JobList() {
     const t = useTranslations('Jobs');
     const { data: jobs, isLoading, error } = useJobsQuery();
 
