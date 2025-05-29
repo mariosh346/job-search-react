@@ -4,10 +4,12 @@ import { useTranslations } from 'next-intl';
 import { Typography } from '@mui/material';
 import { useJobsQuery } from '@/hooks/useJobsQuery';
 import ErrorBoundary from './ErrorBoundary';
+import { useSearchParams } from 'next/navigation';
 
 export default function JobList() {
     const t = useTranslations('Jobs');
-    const { data: jobs, isLoading, error } = useJobsQuery();
+    const searchParams = useSearchParams();
+    const { data: jobs, isLoading, error } = useJobsQuery({ searchParams });
 
     if (isLoading) {
         return (
