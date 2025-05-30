@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { Typography, Skeleton } from '@mui/material';
 import { useJobsQuery } from '@/hooks/useJobsQuery';
 import ErrorBoundary from './ErrorBoundary';
@@ -15,13 +15,15 @@ export default function JobList() {
         searchParams,
         initialData: initialJobs
     });
+    const locale = useLocale();
 
+    const skeletonComponent = () => <Skeleton variant="rectangular" height={200} className='mb-4' />
     if (isLoading) {
         return (
             <div role="status">
-                <Skeleton variant="rectangular" height={200} className='mb-4' />
-                <Skeleton variant="rectangular" height={200} className='mb-4' />
-                <Skeleton variant="rectangular" height={200} className='mb-4' />
+                {skeletonComponent()}
+                {skeletonComponent()}
+                {skeletonComponent()}
             </div>
         )
     }
@@ -38,10 +40,10 @@ export default function JobList() {
         )
     }
 
-    const tagComponent = (tag: string) => <span className="p-2 text-sm mr-2 bg-gray-100 rounded-md">
+    const tagComponent = (tag: string) => <span key={tag} className="p-2 text-sm mr-2 mb-1 bg-gray-100 rounded-md">
         {tag}
     </span>
-    const dateTagComponent = (postedAt: string) => tagComponent(new Date(postedAt).toLocaleDateString())
+    const dateTagComponent = (postedAt: string) => tagComponent(new Date(postedAt).toLocaleDateString(locale))
 
     return (
         <div className="gap-4">
@@ -57,7 +59,7 @@ export default function JobList() {
                         <p>{job.company}</p>
                         <p>{job.location}</p>
                     </div>
-                    <div className="mt-4">
+                    <div className="mt-4 flex flex-wrap">
                         {tagComponent(job.category)}
                         {dateTagComponent(job.postedAt)}
                         {job.tags.map((tag) => (

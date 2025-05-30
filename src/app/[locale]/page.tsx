@@ -13,12 +13,14 @@ export async function generateMetadata() {
 export default async function IndexPage({
   params, searchParams
 }: {
-  params: Promise<{ params: string }>
+  params: Promise<{ locale: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  console.log("param object :", await params);
-  console.log("query search param object :", await searchParams);
-  const jobs = await fetchJobs(await searchParams);
+  const jobsParams = {
+    ...await searchParams,
+    lang: (await params).locale
+  }
+  const jobs = await fetchJobs(jobsParams);
 
   return (
     <main className="h-full gap-2 p-4">

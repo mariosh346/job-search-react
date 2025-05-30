@@ -1,3 +1,4 @@
+import { useLocale } from 'next-intl';
 import { fetchJobs } from '@/api/fetchJobs';
 import { fetchFilters } from '@/api/fetchFilters';
 import { useQuery } from '@tanstack/react-query';
@@ -5,6 +6,7 @@ import { ReadonlyURLSearchParams } from 'next/navigation';
 import { Jobs } from '@/schemas/jobsSchema';
 
 export function searchParamsToObject(params: unknown) {
+    const locale = useLocale();
     if (params instanceof ReadonlyURLSearchParams) {
         const obj: Record<string, string | number> = {};
         for (const [key, value] of params.entries()) {
@@ -12,6 +14,7 @@ export function searchParamsToObject(params: unknown) {
         }
         if (obj.page) obj.page = Number(obj.page);
         if (obj.pageSize) obj.pageSize = Number(obj.pageSize);
+        obj.locale = locale
         return obj;
     }
     return params;
