@@ -13,46 +13,30 @@
       "withRouter": "with the Next.js App Router.",
       "tryChanging": "Try changing the locale in the top right corner and see how the content changes."
     },
-    "title": "next-intl example"
+    "title": "Job Search"
   },
   "LocaleLayout": {
-    "title": "next-intl example"
+    "title": "Job Search"
   },
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, el {GR Ελληνικά} en {US English} other {Unknown}}"
   },
   "Manifest": {
-    "name": "next-intl example"
+    "name": "Job Search"
   },
   "Navigation": {
-    "home": "Home",
-    "pathnames": "Pathnames"
+    "home": "Home"
   },
   "NotFoundPage": {
     "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
     "title": "Page not found"
   },
-  "PageLayout": {
-    "links": {
-      "docs": {
-        "description": "Learn more about next-intl in the official docs.",
-        "href": "https://next-intl.dev",
-        "title": "Docs"
-      },
-      "source": {
-        "description": "Browse the source code of this example on GitHub.",
-        "href": "https://github.com/amannn/next-intl/tree/main/examples/example-app-router",
-        "title": "Source code"
-      }
-    }
-  },
-  "PathnamesPage": {
-    "description": {
-      "intro": "The pathnames are internationalized too.",
-      "english": "If you're using the default language English, you'll see",
-      "greek": "If you change the locale to GR, the URL is localized accordingly"
-    },
-    "title": "Pathnames"
+  "Filters": {
+    "location": "Location",
+    "category": "Category",
+    "location select": "Select location",
+    "category select": "Select category",
+    "searchPlaceholder": "Search"
   }
 }

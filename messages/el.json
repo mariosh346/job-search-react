@@ -13,46 +13,30 @@
             "withRouter": "με το Next.js App Router.",
             "tryChanging": "Δοκιμάστε να αλλάξετε τη γλώσσα πάνω δεξιά και δείτε πώς αλλάζει το περιεχόμενο."
         },
-        "title": "παράδειγμα next-intl"
+        "title": "Θέσεις Εργασίας"
     },
     "LocaleLayout": {
-        "title": "παράδειγμα next-intl"
+        "title": "Θέσεις Εργασίας"
     },
     "LocaleSwitcher": {
         "label": "Αλλαγή γλώσσας",
         "locale": "{locale, select, el {GR Ελληνικά} en {🇺🇸 Αγγλικά} other {Άγνωστο}}"
     },
     "Manifest": {
-        "name": "παράδειγμα next-intl"
+        "name": "Θέσεις Εργασίας"
     },
     "Navigation": {
-        "home": "Αρχική",
-        "pathnames": "Ονομασίες διαδρομών"
+        "home": "Αρχική"
     },
     "NotFoundPage": {
         "description": "Ελέγξτε ξανά τη γραμμή διεύθυνσης του browser ή χρησιμοποιήστε την πλοήγηση για να πάτε σε γνωστή σελίδα.",
         "title": "Η σελίδα δεν βρέθηκε"
     },
-    "PageLayout": {
-        "links": {
-            "docs": {
-                "description": "Μάθετε περισσότερα για το next-intl στην επίσημη τεκμηρίωση.",
-                "href": "https://next-intl.dev",
-                "title": "Τεκμηρίωση"
-            },
-            "source": {
-                "description": "Δείτε τον πηγαίο κώδικα αυτού του παραδείγματος στο GitHub.",
-                "href": "https://github.com/amannn/next-intl/tree/main/examples/example-app-router",
-                "title": "Πηγαίος κώδικας"
-            }
-        }
-    },
-    "PathnamesPage": {
-        "description": {
-            "intro": "Οι ονομασίες διαδρομών είναι επίσης μεταφρασμένες.",
-            "english": "Αν χρησιμοποιείτε την προεπιλεγμένη γλώσσα Αγγλικά, θα δείτε",
-            "greek": "Αν αλλάξετε τη γλώσσα στα Ελληνικά, το URL προσαρμόζεται ανάλογα"
-        },
-        "title": "Ονομασίες διαδρομών"
+    "Filters": {
+        "location": "Τοποθεσία",
+        "category": "Κατηγορία",
+        "location select": "Επιλογή τοποθεσίας",
+        "category select": "Επιλογή κατηγορίας",
+        "searchPlaceholder": "Αναζήτηση"
     }
 }
