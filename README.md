@@ -73,10 +73,10 @@ This project demonstrates a job listing index page built with Next.js (App Route
     *   **`WebPage`:** A general schema for the page itself is included.
     *   **Implementation:** JSON-LD objects are constructed server-side and injected directly into the page's HTML within `<script type="application/ld+json">` tags. This ensures crawlers can access it immediately.
 
-### 5. Material-UI with SSR
+### 5. Material-UI and Tailwind CSS
 
-*   **Decision:** Used Material-UI for UI components.
-*   **Reasoning:** For nice ready components.
+*   **Decision:** Used Material-UI for UI components. Tailwind for CSS
+*   **Reasoning:** Material-UI for nice ready components. Tailwind because it allows for quick styling without writing CSS from scratch.
 
 ### 6. Data Fetching and State Management
 
