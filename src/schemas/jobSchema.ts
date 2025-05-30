@@ -14,7 +14,7 @@ export const jobSchema = z.object({
 
 export type Job = z.infer<typeof jobSchema>;
 
-export const isValidJob = (job: any): boolean => {
+export const isValidJob = (job: unknown): boolean => {
   const result = jobSchema.safeParse(job);
   return result.success;
 };

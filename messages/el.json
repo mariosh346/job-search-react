@@ -16,7 +16,7 @@
     },
     "LocaleSwitcher": {
         "label": "Αλλαγή γλώσσας",
-        "locale": "{locale, select, el {GR Ελληνικά} en {🇺🇸 Αγγλικά} other {Άγνωστο}}"
+        "locale": "{locale, select, el {GR Ελληνικά} en {US Αγγλικά} other {Άγνωστο}}"
     },
     "Manifest": {
         "name": "Θέσεις Εργασίας"

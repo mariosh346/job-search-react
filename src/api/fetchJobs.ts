@@ -1,6 +1,5 @@
 import axiosInstance from './axiosConfig';
 import { isValidJobs, Jobs } from "@/schemas/jobsSchema";
-import { ReadonlyURLSearchParams } from 'next/navigation';
 import { z } from "zod";
 
 const fetchJobsParamsSchema = z.object({
@@ -11,8 +10,6 @@ const fetchJobsParamsSchema = z.object({
   page: z.number().optional(),
   pageSize: z.number().optional(),
 }).strict();
-
-type FetchJobsParams = z.infer<typeof fetchJobsParamsSchema>;
 
 export const fetchJobs = async (params: unknown = {}): Promise<Jobs> => {
   try {

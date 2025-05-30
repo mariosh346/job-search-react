@@ -1,5 +1,4 @@
 import { isValidFilters } from "@/schemas/filtersSchema";
-import axios from "axios";
 import axiosInstance from "./axiosConfig";
 
 export const fetchFilters = async () => {
