@@ -5,7 +5,8 @@
       "part2": "You can try to",
       "retry": "reload the page"
     },
-    "title": "Something went wrong!"
+    "title": "Something went wrong!",
+    "goBack": "Go back"
   },
   "IndexPage": {
     "description": "Find your dream job here!",
