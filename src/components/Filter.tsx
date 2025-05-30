@@ -22,8 +22,10 @@ export function Filter({ options, onChange, type }: FilterProps) {
     return (
         <Select
             onChange={(e) => onChange(e.target.value)}
-            aria-label={t(`${type} select`)}
             value={value}
+            inputProps={{
+                'aria-label': t(`${type} select`),
+            }}
             displayEmpty
         >
             <MenuItem key={type} value="">{t(type)}</MenuItem>

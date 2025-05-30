@@ -37,7 +37,8 @@
     "category": "Category",
     "location select": "Select location",
     "category select": "Select category",
-    "searchPlaceholder": "Search"
+    "searchPlaceholder": "Search",
+    "Clear filters": "Clear filters"
   },
   "Jobs": {
     "No jobs found": "No jobs found"

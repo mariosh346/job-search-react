@@ -37,7 +37,8 @@
         "category": "Κατηγορία",
         "location select": "Επιλογή τοποθεσίας",
         "category select": "Επιλογή κατηγορίας",
-        "searchPlaceholder": "Αναζήτηση"
+        "searchPlaceholder": "Αναζήτηση",
+        "Clear filters": "Καθαρισμός φίλτρων"
     },
     "Jobs": {
         "No jobs found": "Δεν βρέθηκαν θέσεις εργασίας"

@@ -41,7 +41,7 @@ export default function SearchFilters() {
                 className="p-2"
                 onChange={(e) => handleFilterChange('q', e.target.value)}
             />
-            <Link href='/' className='content-center'> <DeleteIcon /> </Link>
+            <Link href='/' className='content-center' aria-label={t('Clear filters')}> <DeleteIcon /> </Link>
         </div>
     );
 }
