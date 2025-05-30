@@ -21,6 +21,7 @@ export default function SearchFilters() {
     const handleFilterChange = (type: string, value: unknown) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set(type, String(value));
+        params.set('page', "1");
         router.push(`?${params.toString()}`);
     };
 

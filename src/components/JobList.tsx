@@ -1,22 +1,28 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { Typography, Skeleton } from '@mui/material';
+import { Typography, Skeleton, Pagination } from '@mui/material';
 import { useJobsQuery } from '@/hooks/useJobsQuery';
 import ErrorBoundary from './ErrorBoundary';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useJobs } from '@/contexts/JobsContext';
 import JobDescription from './JobDescription';
+import { useState } from 'react';
 
 export default function JobList() {
     const t = useTranslations('Jobs');
     const searchParams = useSearchParams();
+    const router = useRouter();
     const { jobs: initialJobs } = useJobs();
     const { data: jobs, isLoading, error } = useJobsQuery({
         searchParams,
         initialData: initialJobs
     });
     const locale = useLocale();
+    const [page, setPage] = useState(() => {
+        const pageParam = searchParams.get('page');
+        return pageParam ? parseInt(pageParam, 10) : 1;
+    });
 
     const skeletonComponent = () => <Skeleton variant="rectangular" height={200} className='mb-4' />
     if (isLoading) {
@@ -46,6 +52,14 @@ export default function JobList() {
     </span>
     const dateTagComponent = (postedAt: string) => tagComponent(new Date(postedAt).toLocaleDateString(locale))
 
+    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+        const params = new URLSearchParams(searchParams);
+        params.set('page', value.toString());
+        setPage(value);
+        router.push(`/?${params.toString()}`);
+    };
+    const pages = jobs ? Math.ceil(jobs.total / jobs.pageSize) : 1
+
     return (
         <div className="gap-4">
             {jobs?.results.map((job) => (
@@ -72,6 +86,14 @@ export default function JobList() {
                     </div>
                 </article>
             ))}
+            <Pagination
+                count={pages}
+                page={page}
+                onChange={handleChangePage}
+                variant="outlined"
+                shape="rounded"
+                className='pb-10'
+            />
         </div>
     );
 }

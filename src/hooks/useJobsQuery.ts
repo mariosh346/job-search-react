@@ -13,7 +13,7 @@ function searchParamsToObject({params, locale}: {params: unknown, locale: string
         }
         if (obj.page) obj.page = Number(obj.page);
         if (obj.pageSize) obj.pageSize = Number(obj.pageSize);
-        obj.locale = locale
+        obj.lang = locale
         return obj;
     }
     return params;
