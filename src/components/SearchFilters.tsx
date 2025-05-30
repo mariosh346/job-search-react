@@ -65,6 +65,7 @@ export default function SearchFilters() {
                 className="p-2"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
+                inputProps={{ 'aria-label': t('searchPlaceholder') }}
             />
             <Link href='/' className='content-center' aria-label={t('Clear filters')}> <DeleteIcon /> </Link>
         </div>

@@ -1,3 +1,3 @@
 * Make multiple the Filter select'
-* update seo and structure
+* add pages
 * use mui on header
