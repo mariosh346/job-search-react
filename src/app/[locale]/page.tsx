@@ -1,32 +1,45 @@
-import { getTranslations } from 'next-intl/server';
 import IndexPageContent from '@/components/IndexPageContent';
 import { fetchJobs } from '@/api/fetchJobs';
 import { JobsProvider } from '@/contexts/JobsContext';
+import { headers } from 'next/headers';
+import type { JobPosting } from 'schema-dts';
+import { generateJobPostingsSchema, generateWebPageSchema, generateMetaData } from '@/utils/schemaGenerator';
+import { getTranslations } from 'next-intl/server';
 
 type Props = {
   params: Promise<{ locale: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export async function generateMetadata(props: Props) {
-  const t = await getTranslations('IndexPage');
-  return {
-    title: t('title'),
-    description: t('description')
-  };
-}
+export const generateMetadata = generateMetaData
 
-export default async function IndexPage({
-  params, searchParams
-}: Props) {
+export default async function IndexPage({ params, searchParams }: Props) {
   const jobsParams = {
-    ...await searchParams,
-    lang: (await params).locale
-  }
+    ...(await searchParams),
+    lang: (await params).locale,
+  };
   const jobs = await fetchJobs(jobsParams);
+
+  const jobPostingsSchema: JobPosting[] = generateJobPostingsSchema(jobs.results);
+
+  const { title, description } = await generateMetadata({ params, searchParams })
+
+  const webPageSchema = generateWebPageSchema(title, description, await headers(), jobsParams.lang);
 
   return (
     <main className="h-full gap-2 p-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      {jobPostingsSchema.map((jobLd, index) => (
+        <script
+          key={`${jobLd.title}${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jobLd) }}
+        />
+      ))}
+
       <JobsProvider jobs={jobs}>
         <IndexPageContent />
       </JobsProvider>

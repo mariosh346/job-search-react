@@ -1,2 +1,3 @@
 * Make multiple the Filter select'
-* Add job description with read more/less
+* update seo and structure
+* use mui on header
