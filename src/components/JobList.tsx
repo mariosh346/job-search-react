@@ -38,6 +38,11 @@ export default function JobList() {
         )
     }
 
+    const tagComponent = (tag: string) => <span className="p-2 text-sm mr-2 bg-gray-100 rounded-md">
+        {tag}
+    </span>
+    const dateTagComponent = (postedAt: string) => tagComponent(new Date(postedAt).toLocaleDateString())
+
     return (
         <div className="gap-4">
             {jobs?.results.map((job) => (
@@ -53,9 +58,11 @@ export default function JobList() {
                         <p>{job.location}</p>
                     </div>
                     <div className="mt-4">
-                        <span className="p-2 text-sm mr-2 bg-gray-100 rounded-md">
-                            {job.category}
-                        </span>
+                        {tagComponent(job.category)}
+                        {dateTagComponent(job.postedAt)}
+                        {job.tags.map((tag) => (
+                            tagComponent(tag)
+                        ))}
                     </div>
                 </article>
             ))}
