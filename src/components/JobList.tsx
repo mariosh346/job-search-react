@@ -7,7 +7,7 @@ import ErrorBoundary from './ErrorBoundary';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useJobs } from '@/contexts/JobsContext';
 import JobDescription from './JobDescription';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function JobList() {
     const t = useTranslations('Jobs');
@@ -19,9 +19,12 @@ export default function JobList() {
         initialData: initialJobs
     });
     const locale = useLocale();
-    const [page, setPage] = useState(() => {
+    const getPageFromParams = () => {
         const pageParam = searchParams.get('page');
         return pageParam ? parseInt(pageParam, 10) : 1;
+    }
+    const [page, setPage] = useState(() => {
+        return getPageFromParams();
     });
 
     const skeletonComponent = () => <Skeleton variant="rectangular" height={200} className='mb-4' />
@@ -59,6 +62,10 @@ export default function JobList() {
         router.push(`/?${params.toString()}`);
     };
     const pages = jobs ? Math.ceil(jobs.total / jobs.pageSize) : 1
+
+    useEffect(() => {
+        setPage(getPageFromParams());
+    }, [getPageFromParams]);
 
     return (
         <div className="gap-4">
