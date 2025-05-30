@@ -1,3 +1,4 @@
+import { serverUrl } from "@/api/axiosConfig";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
@@ -6,7 +7,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://ka-fe-jobboard-assignment-api.azurewebsites.net/:path*',
+        destination: `${serverUrl}/:path*`,
       },
     ];
   },

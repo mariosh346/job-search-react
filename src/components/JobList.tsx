@@ -5,21 +5,15 @@ import { Typography, Skeleton } from '@mui/material';
 import { useJobsQuery } from '@/hooks/useJobsQuery';
 import ErrorBoundary from './ErrorBoundary';
 import { useSearchParams } from 'next/navigation';
-import { fetchJobs } from '@/api/fetchJobs';
-import { Jobs } from '@/schemas/jobsSchema';
+import { useJobs } from '@/contexts/JobsContext';
 
-export async function getServerSideProps() {
-    const searchParams = useSearchParams();
-    const jobs = await fetchJobs(searchParams)
-    return { props: { jobs } }
-}
-
-export default function JobList(props: { jobs?: Jobs }) {
+export default function JobList() {
     const t = useTranslations('Jobs');
     const searchParams = useSearchParams();
+    const { jobs: initialJobs } = useJobs();
     const { data: jobs, isLoading, error } = useJobsQuery({
         searchParams,
-        initialData: props.jobs
+        initialData: initialJobs
     });
 
     if (isLoading) {

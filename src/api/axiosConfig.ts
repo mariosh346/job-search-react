@@ -1,7 +1,12 @@
+import { isServer } from '../utils/environment';
 import axios from 'axios';
 
+export const serverUrl = 'https://ka-fe-jobboard-assignment-api.azurewebsites.net/'
+
+const baseURL = isServer() ? serverUrl : '/api'
+
 const axiosInstance = axios.create({
-  baseURL: '/api/jobs',
+  baseURL: `${baseURL}/jobs`,
   headers: {
     'Content-Type': 'application/json',
   },
