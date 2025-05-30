@@ -6,7 +6,8 @@ import { JobsProvider } from '@/contexts/JobsContext';
 export async function generateMetadata() {
   const t = await getTranslations('IndexPage');
   return {
-    title: t('title')
+    title: t('title'),
+    description: t('description')
   };
 }
 

@@ -8,11 +8,7 @@
     "title": "Something went wrong!"
   },
   "IndexPage": {
-    "description": {
-      "text": "This is a basic example that demonstrates the usage of",
-      "withRouter": "with the Next.js App Router.",
-      "tryChanging": "Try changing the locale in the top right corner and see how the content changes."
-    },
+    "description": "Find your dream job here!",
     "title": "Job Search"
   },
   "LocaleLayout": {
