@@ -3,7 +3,6 @@
 import JobList from './JobList';
 import SearchFilters from './SearchFilters';
 import { useTranslations } from 'next-intl';
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
@@ -11,7 +10,7 @@ export default function IndexPageContent() {
     const t = useTranslations('IndexPage');
 
     return (
-        <Container maxWidth="lg">
+        <div className='max-w-4xl px-6'>
             <Box
                 sx={{
                     my: 4,
@@ -24,6 +23,6 @@ export default function IndexPageContent() {
                 <JobList />
 
             </Box>
-        </Container>
+        </div>
     );
 }
