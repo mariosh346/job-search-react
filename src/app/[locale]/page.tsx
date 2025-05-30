@@ -3,7 +3,12 @@ import IndexPageContent from '@/components/IndexPageContent';
 import { fetchJobs } from '@/api/fetchJobs';
 import { JobsProvider } from '@/contexts/JobsContext';
 
-export async function generateMetadata() {
+type Props = {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export async function generateMetadata(props: Props) {
   const t = await getTranslations('IndexPage');
   return {
     title: t('title'),
@@ -13,10 +18,7 @@ export async function generateMetadata() {
 
 export default async function IndexPage({
   params, searchParams
-}: {
-  params: Promise<{ locale: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}) {
+}: Props) {
   const jobsParams = {
     ...await searchParams,
     lang: (await params).locale

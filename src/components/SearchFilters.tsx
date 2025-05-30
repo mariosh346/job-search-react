@@ -7,11 +7,14 @@ import { Input } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Filter } from './Filter';
 import Link from 'next/link';
+import { useEffect, useState, useCallback } from 'react';
 
 export default function SearchFilters() {
     const t = useTranslations('Filters');
     const router = useRouter();
     const searchParams = useSearchParams();
+    const query = searchParams.get('q') || '';
+    const [inputValue, setInputValue] = useState(query);
 
     const { data: filters } = useFiltersQuery();
 
@@ -20,6 +23,27 @@ export default function SearchFilters() {
         params.set(type, String(value));
         router.push(`?${params.toString()}`);
     };
+
+    const debouncedSearch = useCallback(
+        (value: string) => {
+            handleFilterChange('q', value);
+        },
+        [handleFilterChange]
+    );
+
+    useEffect(() => {
+        setInputValue(query);
+    }, [query]);
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (inputValue !== query) {
+                debouncedSearch(inputValue);
+            }
+        }, 300);
+
+        return () => clearTimeout(timeoutId);
+    }, [inputValue, debouncedSearch, query]);
 
     return (
         <div className="my-8 flex flex-wrap gap-4">
@@ -39,7 +63,8 @@ export default function SearchFilters() {
                 type="search"
                 placeholder={t('searchPlaceholder')}
                 className="p-2"
-                onChange={(e) => handleFilterChange('q', e.target.value)}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
             />
             <Link href='/' className='content-center' aria-label={t('Clear filters')}> <DeleteIcon /> </Link>
         </div>
