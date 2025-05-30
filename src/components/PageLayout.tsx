@@ -8,8 +8,6 @@ type Props = {
 };
 
 export default function PageLayout({ children, title }: Props) {
-  const t = useTranslations('PageLayout');
-
   return (
     <div className="relative flex grow flex-col bg-slate-850 py-36">
       <div className="absolute inset-0 overflow-hidden">

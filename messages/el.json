@@ -38,5 +38,8 @@
         "location select": "Επιλογή τοποθεσίας",
         "category select": "Επιλογή κατηγορίας",
         "searchPlaceholder": "Αναζήτηση"
+    },
+    "Jobs": {
+        "No jobs found": "Δεν βρέθηκαν θέσεις εργασίας"
     }
 }
