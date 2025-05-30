@@ -37,6 +37,8 @@
     "Clear filters": "Clear filters"
   },
   "Jobs": {
-    "No jobs found": "No jobs found"
+    "No jobs found": "No jobs found",
+    "Read more": "Read more",
+    "Read less": "Read less"
   }
 }

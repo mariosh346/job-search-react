@@ -6,6 +6,7 @@ import { useJobsQuery } from '@/hooks/useJobsQuery';
 import ErrorBoundary from './ErrorBoundary';
 import { useSearchParams } from 'next/navigation';
 import { useJobs } from '@/contexts/JobsContext';
+import JobDescription from './JobDescription';
 
 export default function JobList() {
     const t = useTranslations('Jobs');
@@ -58,6 +59,9 @@ export default function JobList() {
                     <div className="mt-2">
                         <p>{job.company}</p>
                         <p>{job.location}</p>
+                    </div>
+                    <div className="mt-4 mb-4">
+                        <JobDescription description={job.description} />
                     </div>
                     <div className="mt-4 flex flex-wrap">
                         {tagComponent(job.category)}
