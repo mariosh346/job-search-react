@@ -33,7 +33,7 @@ export default function JobList() {
         if (page !== currentPageFromParams) {
             setPage(currentPageFromParams);
         }
-    }, [getPageFromParams, searchParams]);
+    }, [getPageFromParams, searchParams, page]);
 
     const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
         const params = new URLSearchParams(searchParams);
@@ -64,7 +64,7 @@ export default function JobList() {
             variant="rectangular"
             height={200}
             className='mb-4'
-        />, [t]);
+        />, []);
 
     if (isLoading) {
         return (
