@@ -7,7 +7,7 @@ import ErrorBoundary from './ErrorBoundary';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useJobs } from '@/contexts/JobsContext';
 import JobDescription from './JobDescription';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function JobList() {
     const t = useTranslations('Jobs');
@@ -20,17 +20,17 @@ export default function JobList() {
         initialData: initialJobs
     });
 
-    const getPageFromParams = () => {
+    const getPageFromParams = useCallback(() => {
         const pageParam = searchParams.get('page');
         return pageParam ? parseInt(pageParam, 10) : 1;
-    };
+    }, [searchParams]);
 
     const [page, setPage] = useState(getPageFromParams);
     const pages = jobs ? Math.ceil(jobs.total / jobs.pageSize) - 1 : 1;
 
     useEffect(() => {
         setPage(getPageFromParams());
-    }, [searchParams]);
+    }, [getPageFromParams, searchParams]);
 
     const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
         const params = new URLSearchParams(searchParams);

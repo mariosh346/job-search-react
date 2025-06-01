@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useFiltersQuery } from '@/hooks/useJobsQuery';
-import { Input } from '@mui/material';
+import { CircularProgress, Input } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Filter } from './Filter';
 import Link from 'next/link';
@@ -16,14 +16,14 @@ export default function SearchFilters() {
     const query = searchParams.get('q') || '';
     const [inputValue, setInputValue] = useState(query);
 
-    const { data: filters } = useFiltersQuery();
+    const { data: filters, isLoading } = useFiltersQuery();
 
-    const handleFilterChange = (type: string, value: unknown) => {
+    const handleFilterChange = useCallback((type: string, value: unknown) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set(type, String(value));
         params.delete('page');
         router.push(`?${params.toString()}`);
-    };
+    }, [searchParams, router]);
 
     const debouncedSearch = useCallback(
         (value: string) => {
@@ -69,6 +69,7 @@ export default function SearchFilters() {
                 inputProps={{ 'aria-label': t('searchPlaceholder') }}
             />
             <Link href='/' className='content-center' aria-label={t('Clear filters')}> <DeleteIcon /> </Link>
+            {isLoading && (<CircularProgress />)}
         </div>
     );
 }

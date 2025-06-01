@@ -2,10 +2,11 @@ import type { JobPosting } from 'schema-dts';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { headers } from 'next/headers';
+import { Job } from '@/schemas/jobSchema';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
-export const generateJobPostingsSchema = (jobs: any[]): JobPosting[] => {
+export const generateJobPostingsSchema = (jobs: Job[]): JobPosting[] => {
   return jobs.map(job => ({
     "@context": "https://schema.org",
     "@type": "JobPosting",
