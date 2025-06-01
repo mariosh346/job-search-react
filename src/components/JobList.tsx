@@ -26,15 +26,19 @@ export default function JobList() {
     };
 
     const [page, setPage] = useState(getPageFromParams);
-    const pages = jobs ? Math.ceil(jobs.total / jobs.pageSize) : 1;
+    const pages = jobs ? Math.ceil(jobs.total / jobs.pageSize) - 1 : 1;
 
     useEffect(() => {
         setPage(getPageFromParams());
     }, [searchParams]);
 
-    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
         const params = new URLSearchParams(searchParams);
-        params.set('page', value.toString());
+        if (value <= 1) {
+            params.delete('page');
+        } else {
+            params.set('page', value.toString());
+        }
         setPage(value);
         router.push(`/?${params.toString()}`);
     };
