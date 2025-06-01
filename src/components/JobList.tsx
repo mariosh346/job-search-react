@@ -13,21 +13,44 @@ export default function JobList() {
     const t = useTranslations('Jobs');
     const searchParams = useSearchParams();
     const router = useRouter();
+    const locale = useLocale();
     const { jobs: initialJobs } = useJobs();
     const { data: jobs, isLoading, error } = useJobsQuery({
         searchParams,
         initialData: initialJobs
     });
-    const locale = useLocale();
+
     const getPageFromParams = () => {
         const pageParam = searchParams.get('page');
         return pageParam ? parseInt(pageParam, 10) : 1;
-    }
-    const [page, setPage] = useState(() => {
-        return getPageFromParams();
-    });
+    };
 
-    const skeletonComponent = () => <Skeleton variant="rectangular" height={200} className='mb-4' />
+    const [page, setPage] = useState(getPageFromParams);
+    const pages = jobs ? Math.ceil(jobs.total / jobs.pageSize) : 1;
+
+    useEffect(() => {
+        setPage(getPageFromParams());
+    }, [searchParams]);
+
+    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+        const params = new URLSearchParams(searchParams);
+        params.set('page', value.toString());
+        setPage(value);
+        router.push(`/?${params.toString()}`);
+    };
+
+    const tagComponent = (tag: string) => (
+        <span key={tag} className="p-2 text-sm mr-2 mb-1 bg-gray-100 rounded-md">
+            {tag}
+        </span>
+    );
+
+    const dateTagComponent = (postedAt: string) =>
+        tagComponent(new Date(postedAt).toLocaleDateString(locale));
+
+    const skeletonComponent = () =>
+        <Skeleton variant="rectangular" height={200} className='mb-4' />;
+
     if (isLoading) {
         return (
             <div role="status">
@@ -35,7 +58,7 @@ export default function JobList() {
                 {skeletonComponent()}
                 {skeletonComponent()}
             </div>
-        )
+        );
     }
 
     if (error) {
@@ -47,25 +70,8 @@ export default function JobList() {
             <div>
                 {t('No jobs found')}
             </div>
-        )
+        );
     }
-
-    const tagComponent = (tag: string) => <span key={tag} className="p-2 text-sm mr-2 mb-1 bg-gray-100 rounded-md">
-        {tag}
-    </span>
-    const dateTagComponent = (postedAt: string) => tagComponent(new Date(postedAt).toLocaleDateString(locale))
-
-    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
-        const params = new URLSearchParams(searchParams);
-        params.set('page', value.toString());
-        setPage(value);
-        router.push(`/?${params.toString()}`);
-    };
-    const pages = jobs ? Math.ceil(jobs.total / jobs.pageSize) : 1
-
-    useEffect(() => {
-        setPage(getPageFromParams());
-    }, [getPageFromParams]);
 
     return (
         <div className="gap-4">
