@@ -21,7 +21,7 @@ export function Filter({ options, onChange, type }: FilterProps) {
 
     return (
         <Select
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => onChange(String(e.target.value))}
             value={value}
             inputProps={{
                 'aria-label': t(`${type} select`),
