@@ -7,7 +7,7 @@ import ErrorBoundary from './ErrorBoundary';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useJobs } from '@/contexts/JobsContext';
 import JobDescription from './JobDescription';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export default function JobList() {
     const t = useTranslations('Jobs');
@@ -29,7 +29,10 @@ export default function JobList() {
     const pages = jobs ? Math.ceil(jobs.total / jobs.pageSize) - 1 : 1;
 
     useEffect(() => {
-        setPage(getPageFromParams());
+        const currentPageFromParams = getPageFromParams();
+        if (page !== currentPageFromParams) {
+            setPage(currentPageFromParams);
+        }
     }, [getPageFromParams, searchParams]);
 
     const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
@@ -43,24 +46,32 @@ export default function JobList() {
         router.push(`/?${params.toString()}`);
     };
 
-    const tagComponent = (tag: string) => (
-        <span key={tag} className="p-2 text-sm mr-2 mb-1 bg-gray-100 rounded-md">
+    const tagComponent = useCallback((tag: string) => (
+        <span
+            key={tag}
+            className="p-2 text-sm mr-2 mb-1 bg-gray-100 rounded-md"
+        >
             {tag}
         </span>
-    );
+    ), []);
 
-    const dateTagComponent = (postedAt: string) =>
-        tagComponent(new Date(postedAt).toLocaleDateString(locale));
+    const dateTagComponent = useCallback((postedAt: string) =>
+        tagComponent(new Date(postedAt).toLocaleDateString(locale)),
+        [locale, tagComponent]);
 
-    const skeletonComponent = () =>
-        <Skeleton variant="rectangular" height={200} className='mb-4' />;
+    const skeletonComponent = useMemo(() =>
+        <Skeleton
+            variant="rectangular"
+            height={200}
+            className='mb-4'
+        />, [t]);
 
     if (isLoading) {
         return (
             <div role="status">
-                {skeletonComponent()}
-                {skeletonComponent()}
-                {skeletonComponent()}
+                {skeletonComponent}
+                {skeletonComponent}
+                {skeletonComponent}
             </div>
         );
     }
@@ -78,13 +89,19 @@ export default function JobList() {
     }
 
     return (
-        <div className="gap-4">
+        <div className="gap-4" role="region">
             {jobs?.results.map((job) => (
                 <article
                     key={job.id}
                     className="p-4 border rounded-lg mb-6"
+                    role="article"
+                    aria-labelledby={`job-title-${job.id}`}
                 >
-                    <Typography variant="h4" component="h2">
+                    <Typography
+                        variant="h4"
+                        component="h2"
+                        id={`job-title-${job.id}`}
+                    >
                         {job.title}
                     </Typography>
                     <div className="mt-2">
@@ -110,6 +127,7 @@ export default function JobList() {
                 variant="outlined"
                 shape="rounded"
                 className='pb-10'
+                disabled={isLoading}
             />
         </div>
     );
