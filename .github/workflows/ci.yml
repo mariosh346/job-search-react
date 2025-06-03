@@ -9,6 +9,9 @@ on:
 jobs:
   vitest:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
     steps:
     - uses: actions/setup-node@v4
       with:
